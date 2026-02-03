@@ -32,16 +32,27 @@
 // });
 
 
-import * as functions from 'firebase-functions';
-import { createApp } from './main';
+import { onRequest } from "firebase-functions/v2/https";
+import { setGlobalOptions } from "firebase-functions/v2";
+import { createApp } from "./main";
 
 let serverPromise: Promise<any> | undefined;
 
-exports.api = functions.https.onRequest(async (req, res) => {
+// optional global defaults (recommended)
+setGlobalOptions({
+  region: "us-central1",
+  memory: "512MiB",
+  concurrency: 80,   // HUGE win vs v1
+  maxInstances: 5,   // cost protection
+});
+
+export const api = onRequest(async (req, res) => {
   if (!serverPromise) {
     serverPromise = createApp();
   }
 
   const server = await serverPromise;
-  server.server.emit('request', req, res);
+
+  // Fastify handles raw Node req/res
+  server.server.emit("request", req, res);
 });

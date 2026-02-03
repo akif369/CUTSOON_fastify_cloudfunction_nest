@@ -1,7 +1,7 @@
 import { NestFactory } from "@nestjs/core";
 import {
   FastifyAdapter,
-  type NestFastifyApplication,
+  NestFastifyApplication,
 } from "@nestjs/platform-fastify";
 import { AppModule } from "./app.module";
 
@@ -12,9 +12,12 @@ export async function createApp(): Promise<any> {
   );
 
   await app.init();
+
   const instance = app.getHttpAdapter().getInstance();
-  if (typeof instance?.ready === "function") {
+
+  if (typeof instance.ready === "function") {
     await instance.ready();
   }
+
   return instance;
 }

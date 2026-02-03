@@ -8,7 +8,7 @@ async function createApp() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule, new platform_fastify_1.FastifyAdapter({ logger: false }));
     await app.init();
     const instance = app.getHttpAdapter().getInstance();
-    if (typeof instance?.ready === "function") {
+    if (typeof instance.ready === "function") {
         await instance.ready();
     }
     return instance;

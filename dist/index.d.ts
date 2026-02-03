@@ -6,5 +6,5 @@
  *
  * See a full list of supported triggers at https://firebase.google.com/docs/functions
  */
-export {};
+export declare const api: import("firebase-functions/v2/https").HttpsFunction;
 //# sourceMappingURL=index.d.ts.map

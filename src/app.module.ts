@@ -1,10 +1,10 @@
-import { Module, Controller, Get } from '@nestjs/common';
+import { Module, Controller, Get } from "@nestjs/common";
 
 @Controller()
 class AppController {
   @Get()
   hello() {
-    return { msg: 'Nest + Fastify + Firebase 🚀' };
+    return { msg: "Nest + Fastify + Firebase 🚀" };
   }
 }
 
